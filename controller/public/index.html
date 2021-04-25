@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Password Manager</title>
+</head>
+<body>
+    <div class="header">
+        <h3>JT Password Manager</h3>
+    </div>
+    <div class="container">
+        <form action="/p" method="post"> 
+            
+            <label for="user_text">
+                ID:
+            </label>
+            <input type="text" name="user_text" id="user_text">
+            <label for="password">
+                That one master password you need to rememeber:
+            </label>
+            <input type="password" name="password" id="master_password">
+            
+            <input type="submit" value="Enter">
+        </form>
+        <div class="register">
+            <a href="/register">
+                Sign Up
+            </a>
+        </div>
+    </div>
+</body>
+</html>

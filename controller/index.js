@@ -1,12 +1,18 @@
-const http = require('http');
+const express = require('express')
+const path = require('path')
 
-const server = http.createServer( (req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/html');
-    res.write("<h1>Hello sexyrexy 7567</h1>");
-    res.end();
+const app = express()
+
+const PORT = process.env.PORT || 5000
+
+app.listen(PORT, () => {
+    console.log(`Server started on port ${PORT}`);
 });
 
-server.listen(7567, () => {
-    console.log("Welcomme, sexyrexy7567");
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
 });
+
+app.post('/p', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'interface.html'));
+})
