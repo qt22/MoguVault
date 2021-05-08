@@ -1,14 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>Password Manager</title>
+    <link rel="shortcut icon" href="#">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
     <div class="header">
-        <h3>JT Password Manager</h3>
-    </div>
+        <h2>JT Password Manager</h2>
+    </div> 
     <div class="container">
-        <form action="/p" method="post"> 
+        <form action='/' id='login_info' method="post"> 
             
             <label for="user_text">
                 ID:
@@ -21,6 +24,9 @@
             
             <input type="submit" value="Enter">
         </form>
+
+        <hr>
+
         <div class="register">
             <a href="/register">
                 Sign Up

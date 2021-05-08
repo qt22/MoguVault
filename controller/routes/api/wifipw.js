@@ -1,4 +1,5 @@
 const express = require('express')
+const path = require('path');
 const router = express.Router()
 
 const wifi = require('../../WIFI')
@@ -13,12 +14,15 @@ router.get('/:name', (req, res) => {
     }else{
         res.status(400).json({ msg: `No wifi with the name of ${wifi_name}`})
     }
-
     // 
 })
     
 router.get('/', (req, res) => {
-    res.json(wifi)
+    res.sendFile(path.join(__dirname, '../../public', 'index.html'))
+})
+
+router.post('/home', (req, res) => {
+    
 })
 
 module.exports = router;
