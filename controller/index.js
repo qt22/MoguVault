@@ -1,5 +1,4 @@
 const express = require('express')
-const wifi_data = require('./WIFI');
 
 const app = express()
 
@@ -10,4 +9,6 @@ app.listen(PORT, () => {
 });
 
 // router under /
-app.use('/', require('./routes/api/wifipw'))
+app.use('/', require('./router'))
+
+

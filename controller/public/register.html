@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Password Manager</title>
+    <title>Sign Up</title>
     <link rel="shortcut icon" href="#">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
@@ -11,27 +11,29 @@
         <h2>JT Password Manager</h2>
     </div> 
     <div class="container">
-        <form action='/home' id='login_form' method="post"> 
+        <form action='/' id='register_form' method="post"> 
             
             <label for="username">
-                Username:
+                Please enter your username:
             </label>
             <input type="text" name="username" id="username">
             <label for="password">
-                Master Password:
+                Enter a strong Master Password (this is the only password you need to remember):
             </label>
             <input type="password" name="password" id="master_password">
             
-            <input type="submit" value="Enter">
+            <input type="submit" value="Sign up">
         </form>
 
         <hr>
 
         <div class="link">
-            <a href="/register">
-                Sign Up
+            <a href="/">
+                back to log in page
             </a>
         </div>
     </div>
+
+    <!-- <script type="text/javascript" src="register.js"></script> -->
 </body>
 </html>
