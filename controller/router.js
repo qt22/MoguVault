@@ -1,25 +1,24 @@
 const express = require('express')
 const bodyParser = require('body-parser')
-const crypto = require("crypto")
-const path = require('path');
+const crypto = require('crypto')
+const path = require('path')
+const fs = require('fs')
+const uuid = require('uuid')
 const router = express.Router()
-
-const wifi = require('./WIFI')
+const version = '0.1.0'
+const passphrase = 'sexyrexy7567'
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-// router.get('/:name', (req, res) => {
-//     const wifi_name = req.params.name
-//     const found = wifi.some(wifi => wifi.username === wifi_name)
-
-//     if(found){
-//         const pw_object = wifi.filter( wifi => wifi.username === wifi_name )[0]
-//         res.send(`Wifi password for ${pw_object.username}: ${pw_object.password}` )
-//     }else{
-//         res.status(400).send(`Page not available`)
-//     }
-//     // 
-// })
+const user = {
+    "uuid": "",
+    "username": "",
+    "publicKey": "",
+    "privateKey": "",
+    "masterPassword-encrypted": "",
+    "timeStamp": "",
+    "version": "0.0"
+}
     
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public', 'index.html'))
@@ -43,10 +42,9 @@ router.post('/', (req, res) => {
             type: 'pkcs8',
             format: 'pem',
             cipher: 'aes-256-cbc',
-            passphrase: 'top secret'
+            passphrase: passphrase
         }
     })
-    console.log(publicKey.toString())
 
     const encryptedMasterpw = crypto.publicEncrypt(
         {
@@ -58,24 +56,34 @@ router.post('/', (req, res) => {
 	    Buffer.from(masterpw)
     );
 
-    console.log("encypted data: ", encryptedMasterpw.toString("base64"))
+    user['uuid'] = uuid.v4()
+    user['username'] = username
+    user['publicKey'] = publicKey.toString()
+    user['privateKey'] = privateKey.toString()
+    user['masterPassword-encrypted'] = encryptedMasterpw.toString("base64")
+    user['timeStamp'] = new Date().toLocaleString()
+    user['version'] = version
 
-    const decryptedMasterpw = crypto.privateDecrypt(
-        {
-            key: privateKey,
-            // In order to decrypt the data, we need to specify the
-            // same hashing function and padding scheme that we used to
-            // encrypt the data in the previous step
-            padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
-            oaepHash: "sha256",
-            passphrase: 'top secret'
-        },
-        encryptedMasterpw
-    );
-    
-    // The decrypted data is of the Buffer type, which we can convert to a
-    // string to reveal the original data
-    console.log("decrypted data: ", decryptedMasterpw.toString())
+    const userjsondata = JSON.stringify(user, null, 2)
+
+    fs.writeFile('users.json', userjsondata, (err) => {
+        if (err) throw err;
+
+        
+    })
+
+    // const decryptedMasterpw = crypto.privateDecrypt(
+    //     {
+    //         key: privateKey,
+    //         // In order to decrypt the data, we need to specify the
+    //         // same hashing function and padding scheme that we used to
+    //         // encrypt the data in the previous step
+    //         padding: crypto.constants.RSA_PKCS1_OAEP_PADDING,
+    //         oaepHash: "sha256",
+    //         passphrase: 'top secret'
+    //     },
+    //     encryptedMasterpw
+    // );
     
     res.redirect('/')
 })
@@ -83,6 +91,13 @@ router.post('/', (req, res) => {
 router.post('/home', (req, res) => {
     const username = req.body.username
     const masterpw = req.body.password
+    const user = new Object()
+
+    fs.readFile('user.json', (err, userinfo) => {
+        if (err) throw err;
+        user = JSON.parse(userinfo)
+        console.log(user)
+    })
 
     res.send(`Welcome ${username}! Your master password is ${masterpw}.`)
 })
