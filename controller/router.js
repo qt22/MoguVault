@@ -10,20 +10,23 @@ const passphrase = 'sexyrexy7567'
 
 router.use(bodyParser.urlencoded({ extended: true }));
 
-const user = {
-    "uuid": "",
-    "username": "",
-    "publicKey": "",
-    "privateKey": "",
-    "masterPassword-encrypted": "",
-    "timeStamp": "",
-    "version": "0.0"
-}
+const user =  {
+    uuid: "",
+    username: "",
+    publicKey: "",
+    privateKey: "",
+    masterPassword_encrypted: "",
+    timeStamp: "",
+    version: "0.1.0"
+};
+
     
+// main page when user enters the website
 router.get('/', (req, res) => {
     res.sendFile(path.join(__dirname, '/public', 'index.html'))
 })
 
+// after register
 router.post('/', (req, res) => {
     const username = req.body.username
     const masterpw = req.body.password
@@ -66,10 +69,15 @@ router.post('/', (req, res) => {
 
     const userjsondata = JSON.stringify(user, null, 2)
 
-    fs.writeFile('users.json', userjsondata, (err) => {
+    fs.readFile('users.json', (err, data) => {
         if (err) throw err;
 
-        
+        var json = JSON.parse(data)
+        json.push(userjsondata)
+
+        fs.writeFile('users.json', JSON.stringify(json, null, 2), (err) => {
+            if (err) throw err
+        })
     })
 
     // const decryptedMasterpw = crypto.privateDecrypt(
@@ -88,20 +96,22 @@ router.post('/', (req, res) => {
     res.redirect('/')
 })
 
+// home page after logging in
 router.post('/home', (req, res) => {
     const username = req.body.username
     const masterpw = req.body.password
-    const user = new Object()
+    var user = new Object()
 
-    fs.readFile('user.json', (err, userinfo) => {
+    fs.readFile('users.json', (err, userinfo) => {
         if (err) throw err;
         user = JSON.parse(userinfo)
-        console.log(user)
+        console.log(user[0])
     })
 
     res.send(`Welcome ${username}! Your master password is ${masterpw}.`)
 })
 
+// register page
 router.get('/register', (req, res) => {
     res.sendFile(path.join(__dirname, '/public', 'register.html'))
 })
