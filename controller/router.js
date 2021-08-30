@@ -1,25 +1,17 @@
 const express = require('express')
+const router = express.Router()
+const dbo = require('./db/conn.js')
+
 const bodyParser = require('body-parser')
 const crypto = require('crypto')
 const path = require('path')
 const fs = require('fs')
 const uuid = require('uuid')
-const router = express.Router()
+
 const version = '0.1.0'
 const passphrase = 'sexyrexy7567'
 
 router.use(bodyParser.urlencoded({ extended: true }));
-
-const user =  {
-    uuid: "",
-    username: "",
-    publicKey: "",
-    privateKey: "",
-    masterPassword_encrypted: "",
-    timeStamp: "",
-    version: "0.1.0"
-};
-
     
 // main page when user enters the website
 router.get('/', (req, res) => {
@@ -59,26 +51,44 @@ router.post('/', (req, res) => {
 	    Buffer.from(masterpw)
     );
 
-    user['uuid'] = uuid.v4()
-    user['username'] = username
-    user['publicKey'] = publicKey.toString()
-    user['privateKey'] = privateKey.toString()
-    user['masterPassword-encrypted'] = encryptedMasterpw.toString("base64")
-    user['timeStamp'] = new Date().toLocaleString()
-    user['version'] = version
-
-    const userjsondata = JSON.stringify(user, null, 2)
-
-    fs.readFile('users.json', (err, data) => {
+    let db_connect = dbo.getDb("PasswordManager");
+    const user =  {
+        _id: uuid.v4(),
+        username: username,
+        publicKey: publicKey.toString(),
+        privateKey: privateKey.toString(),
+        masterPassword_encrypted: encryptedMasterpw.toString("base64"),
+        timeStamp: new Date().toLocaleString(),
+        version: version
+    };
+    db_connect.collection("Register").insertOne(user, function (err, res) {
         if (err) throw err;
+    });
 
-        var json = JSON.parse(data)
-        json.push(userjsondata)
+    // user['uuid'] = uuid.v4()
+    // user['username'] = username
+    // user['publicKey'] = publicKey.toString()
+    // user['privateKey'] = privateKey.toString()
+    // user['masterPassword-encrypted'] = encryptedMasterpw.toString("base64")
+    // user['timeStamp'] = new Date().toLocaleString()
+    // user['version'] = version
 
-        fs.writeFile('users.json', JSON.stringify(json, null, 2), (err) => {
-            if (err) throw err
-        })
-    })
+    // const userjsondata = JSON.stringify(user, null, 2)
+
+    // fs.readFile('users.json', (err, data) => {
+    //     if (err) throw err;
+
+    //     var json = JSON.parse(data)
+    //     json.push(userjsondata)
+
+    //     fs.writeFile('users.json', JSON.stringify(json, null, 2), (err) => {
+    //         if (err) throw err
+    //     })
+    // })
+
+    /*
+        SEPARATE
+    */
 
     // const decryptedMasterpw = crypto.privateDecrypt(
     //     {
