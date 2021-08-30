@@ -110,13 +110,6 @@ router.post('/', (req, res) => {
 router.post('/home', (req, res) => {
     const username = req.body.username
     const masterpw = req.body.password
-    var user = new Object()
-
-    fs.readFile('users.json', (err, userinfo) => {
-        if (err) throw err;
-        user = JSON.parse(userinfo)
-        console.log(user[0])
-    })
 
     res.send(`Welcome ${username}! Your master password is ${masterpw}.`)
 })
