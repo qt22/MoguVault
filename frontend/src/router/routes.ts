@@ -1,12 +1,12 @@
 import { RouteConfig } from 'vue-router';
 
-import Home from '../views/Home.vue';
+import Register from '../views/register.vue';
 
 const routes: RouteConfig[] = [
   {
-    path: '/home',
-    name: 'home',
-    component: Home
+    path: '/register',
+    name: 'register',
+    component: Register
   }
   // to do: add page not found
 ];
