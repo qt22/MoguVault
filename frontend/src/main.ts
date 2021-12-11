@@ -7,6 +7,9 @@ import vuetify from './plugins/vuetify';
 // Global Components
 import '@/plugins/vee-validate';
 
+// Styles
+import './sass/styles.scss';
+
 Vue.config.productionTip = false;
 
 new Vue({
