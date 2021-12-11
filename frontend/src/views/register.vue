@@ -4,7 +4,8 @@
       <v-row justify="center" align="center">
         <v-col cols="4">
           <v-form class="signup-form" ref="form" v-model="valid">
-            <v-text-field> </v-text-field>
+            <v-text-field placeholder="Email"> </v-text-field>
+            <v-text-field placeholder="Password"></v-text-field>
             <v-btn class="ma-0" type="submit" :disabled="invalid">
               submit
             </v-btn>
