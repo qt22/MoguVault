@@ -1,8 +1,18 @@
 import Vue from 'vue';
 import { ValidationProvider, extend, ValidationObserver } from 'vee-validate';
-import { required, email, min, max, regex } from 'vee-validate/dist/rules';
+import {
+  alpha_dash,
+  confirmed,
+  email,
+  max,
+  min,
+  regex,
+  required
+} from 'vee-validate/dist/rules';
 
 // Register rules
+extend('alpha_dash', alpha_dash);
+extend('confirmed', confirmed);
 extend('required', required);
 extend('email', email);
 extend('min', min);
