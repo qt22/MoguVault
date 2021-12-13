@@ -8,21 +8,67 @@
               <form @submit.prevent="handleSubmit(onRegister)">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  name="Username"
-                  rules="required|alpha_spaces"
+                  :name="form.username.name"
+                  :rules="{ ...form.username.rules }"
                   slim
                   mode="eager"
                 >
                   <v-text-field
                     v-model="user.username"
                     :error-messages="errors"
-                    label="Username"
-                    prepend-icon="mdi-account"
+                    :label="form.username.name"
+                    :prepend-icon="form.username.icon"
                   >
                   </v-text-field>
                 </ValidationProvider>
 
-                <Textfield :textfieldInfo="textfieldForm" />
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :name="form.email.name"
+                  :rules="{ ...form.email.rules }"
+                  slim
+                  mode="eager"
+                >
+                  <v-text-field
+                    v-model="user.email"
+                    :error-messages="errors"
+                    :label="form.email.name"
+                    :prepend-icon="form.email.icon"
+                  >
+                  </v-text-field>
+                </ValidationProvider>
+
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  vid="password"
+                  :name="form.password.name"
+                  :rules="{ ...form.password.rules }"
+                  slim
+                  mode="eager"
+                >
+                  <v-text-field
+                    v-model="user.password"
+                    :error-messages="errors"
+                    :label="form.password.name"
+                    :prepend-icon="form.password.icon"
+                  >
+                  </v-text-field>
+                </ValidationProvider>
+
+                <ValidationProvider
+                  v-slot="{ errors }"
+                  :name="form.confirmPassword.name"
+                  :rules="{ ...form.confirmPassword.rules }"
+                  slim
+                  mode="eager"
+                >
+                  <v-text-field
+                    :error-messages="errors"
+                    :label="form.confirmPassword.name"
+                    :prepend-icon="form.confirmPassword.icon"
+                  >
+                  </v-text-field>
+                </ValidationProvider>
 
                 <v-btn :disabled="invalid" type="submit">Create Account</v-btn>
               </form>
@@ -36,27 +82,48 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
-import Textfield from '../components/Textfield.vue';
 
-@Component({
-  components: {
-    Textfield
-  }
-})
+@Component
 export default class Register extends Vue {
-  user = {
+  user: Record<string, string> = {
     username: '',
     email: '',
     password: ''
   };
 
-  textfieldForm = {
-    model: this.user.email,
-    name: 'email email',
-    prepend_icon: 'mdi-email',
-    rules: {
-      required: true,
-      email: true
+  form: Record<string, Record<string, unknown>> = {
+    username: {
+      name: 'username',
+      icon: 'mdi-account',
+      rules: {
+        required: true,
+        alpha_dash: true
+      }
+    },
+    email: {
+      name: 'email',
+      icon: 'mdi-email',
+      rules: {
+        required: true,
+        email: true
+      }
+    },
+    password: {
+      name: 'password',
+      icon: 'mdi-lock',
+      rules: {
+        required: true,
+        min: 8,
+        max: 32
+      }
+    },
+    confirmPassword: {
+      name: 'confirmPassword',
+      icon: 'mdi-lock', // To Do: change icon to lock alert in error state
+      rules: {
+        // required: true,
+        confirmed: 'password'
+      }
     }
   };
 

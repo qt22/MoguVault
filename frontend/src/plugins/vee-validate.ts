@@ -1,7 +1,8 @@
 import Vue from 'vue';
 import { ValidationProvider, extend, ValidationObserver } from 'vee-validate';
 import {
-  alpha_spaces,
+  alpha_dash,
+  confirmed,
   email,
   max,
   min,
@@ -10,7 +11,8 @@ import {
 } from 'vee-validate/dist/rules';
 
 // Register rules
-extend('alpha_spaces', alpha_spaces);
+extend('alpha_dash', alpha_dash);
+extend('confirmed', confirmed);
 extend('required', required);
 extend('email', email);
 extend('min', min);
