@@ -8,7 +8,7 @@
               <form @submit.prevent="handleSubmit(onRegister)">
                 <ValidationProvider
                   v-slot="{ errors }"
-                  name="user name"
+                  name="Username"
                   rules="required|alpha_spaces"
                   slim
                   mode="eager"
@@ -17,9 +17,12 @@
                     v-model="user.username"
                     :error-messages="errors"
                     label="Username"
+                    prepend-icon="mdi-account"
                   >
                   </v-text-field>
                 </ValidationProvider>
+
+                <Textfield :textfieldInfo="textfieldForm" />
 
                 <v-btn :disabled="invalid" type="submit">Create Account</v-btn>
               </form>
@@ -33,15 +36,33 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import Textfield from '../components/Textfield.vue';
 
-@Component
+@Component({
+  components: {
+    Textfield
+  }
+})
 export default class Register extends Vue {
   user = {
-    username: ''
+    username: '',
+    email: '',
+    password: ''
+  };
+
+  textfieldForm = {
+    model: this.user.email,
+    name: 'email email',
+    prepend_icon: 'mdi-email',
+    rules: {
+      required: true,
+      email: true
+    }
   };
 
   onRegister() {
-    console.log('sending user data to backend');
+    console.log('sending user data to backend with data: ');
+    console.log(this.user);
   }
 }
 </script>
