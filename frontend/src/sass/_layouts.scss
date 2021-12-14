@@ -1,0 +1,41 @@
+// font templates
+
+@mixin apply-font(
+  $font-size,
+  $font-family: $font-source-sans-pro,
+  $font-style: 'normal',
+  $font-weight: '400',
+  $line-height: 150%
+) {
+  font-family: $font-family;
+  font-size: $font-size;
+  font-style: $font-style;
+  font-weight: $font-weight;
+  line-height: $line-height;
+}
+
+// flexbox templates
+
+@mixin flex-column-justify-align($justify: 'center', $align: 'center') {
+  display: flex;
+  flex-direction: column;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+@mixin flex-row-justify-align($justify: 'center', $align: 'center') {
+  display: flex;
+  flex-direction: row;
+  justify-content: $justify;
+  align-items: $align;
+}
+
+// @mixin flex-col {
+//   display: flex;
+//   flex-direction: column;
+// }
+
+// @mixin flex-row {
+//   display: flex;
+//   flex-direction: row;
+// }

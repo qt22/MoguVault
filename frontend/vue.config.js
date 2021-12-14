@@ -4,8 +4,8 @@ module.exports = {
     loaderOptions: {
       scss: {
         additionalData: `
-          @import "~@/sass/_vars.scss";
           @import "~@/sass/_breakpoints.scss";
+          @import "~@/sass/_fonts.scss";
           @import "~@/sass/_layouts.scss";
         `
       }
