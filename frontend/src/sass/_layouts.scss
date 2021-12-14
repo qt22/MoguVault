@@ -16,14 +16,14 @@
 
 // flexbox templates
 
-@mixin flex-column-justify-align($justify: 'center', $align: 'center') {
+@mixin flex-column-justify-align($justify: center, $align: center) {
   display: flex;
   flex-direction: column;
   justify-content: $justify;
   align-items: $align;
 }
 
-@mixin flex-row-justify-align($justify: 'center', $align: 'center') {
+@mixin flex-row-justify-align($justify: center, $align: center) {
   display: flex;
   flex-direction: row;
   justify-content: $justify;
