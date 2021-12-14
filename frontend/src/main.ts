@@ -8,6 +8,7 @@ import vuetify from './plugins/vuetify';
 import '@/plugins/vee-validate';
 
 // Styles
+import '@fontsource/source-sans-pro';
 import './sass/styles.scss';
 
 Vue.config.productionTip = false;
