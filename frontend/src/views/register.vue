@@ -1,5 +1,5 @@
 <template>
-  <v-main class="register-page-container">
+  <v-main class="register__container">
     <v-container fluid class="fill-height justify-center ma-0">
       <v-row justify="center">
         <v-col cols="4">
@@ -8,6 +8,7 @@
             color="lime lighten-5"
             elevation="8"
           >
+            <div class="register__form-title">Sign Up</div>
             <ValidationObserver v-slot="{ handleSubmit, invalid }" slim>
               <form @submit.prevent="handleSubmit(onRegister)">
                 <ValidationProvider
@@ -117,10 +118,16 @@ export default class Register extends Vue {
 </script>
 
 <style lang="scss" scoped>
-.register-page-container {
+.register__container {
   height: 100%;
   background: url('/images/nasa-earth.png');
   background-size: cover;
   background-repeat: no-repeat;
+}
+
+.register__form-title {
+  @include flex-row-justify-align();
+  @include apply-font(24px, $font-source-sans-pro, normal, bold);
+  margin-bottom: 12px;
 }
 </style>
