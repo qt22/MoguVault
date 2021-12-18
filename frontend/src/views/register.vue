@@ -128,6 +128,6 @@ export default class Register extends Vue {
 .register__form-title {
   @include flex-row-justify-align();
   @include apply-font(24px, $font-source-sans-pro, normal, bold);
-  margin-bottom: 12px;
+  margin-bottom: 20px;
 }
 </style>
