@@ -1,12 +1,16 @@
 <template>
-  <v-card> </v-card>
+  <v-list>
+    <v-subheader>{{ categoryHeader }}</v-subheader>
+  </v-list>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
+import { Vue, Component, Prop } from 'vue-property-decorator';
 
 @Component
-export default class passwordCard extends Vue {}
+export default class passwordGroup extends Vue {
+  @Prop({ required: true }) categoryHeader?: string;
+}
 </script>
 
 <style lang="scss" scoped></style>

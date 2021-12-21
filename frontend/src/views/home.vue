@@ -1,16 +1,10 @@
 <template>
   <v-main class="login__container">
     <v-container fluid class="fill-height justify-center ma-0">
-      <v-row justify="center">
-        <v-col cols="4">
-          <v-card
-            class="col-12 py-6 px-10"
-            color="lime lighten-5"
-            elevation="8"
-          >
-            <div class="login__form-title">Welcome to Mogu Vault</div>
-          </v-card>
-        </v-col>
+      <v-row justify="start">
+        <v-col cols="3">
+          <passwordGroup categoryHeader="nothing"> </passwordGroup
+        ></v-col>
       </v-row>
     </v-container>
   </v-main>
@@ -18,8 +12,11 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
+import passwordGroup from '@/components/passwordGroup.vue';
 
-@Component
+@Component({
+  components: { passwordGroup }
+})
 export default class Home extends Vue {}
 </script>
 
