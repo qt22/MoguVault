@@ -3,7 +3,11 @@
     <v-container fluid class="fill-height justify-center ma-0">
       <v-row justify="start">
         <v-col cols="3">
-          <passwordGroup categoryHeader="nothing"> </passwordGroup
+          <passwordGroup
+            categoryHeader="nothing"
+            :categoryItems="mainCategories"
+          >
+          </passwordGroup
         ></v-col>
       </v-row>
     </v-container>
@@ -17,7 +21,15 @@ import passwordGroup from '@/components/passwordGroup.vue';
 @Component({
   components: { passwordGroup }
 })
-export default class Home extends Vue {}
+export default class Home extends Vue {
+  mainCategories = [
+    {
+      icon: 'mdi-shield-half-full',
+      size: 42,
+      title: 'All passwords'
+    }
+  ];
+}
 </script>
 
 <style lang="scss" scoped>
