@@ -6,6 +6,7 @@
           <passwordGroup
             categoryHeader="nothing"
             :categoryItems="mainCategories"
+            @selectedcategoryname="selectedCategoryName"
           >
           </passwordGroup
         ></v-col>
@@ -27,8 +28,22 @@ export default class Home extends Vue {
       icon: 'mdi-shield-half-full',
       size: 42,
       title: 'All passwords'
+    },
+    {
+      icon: 'mdi-star',
+      size: 19,
+      title: 'Favourites'
+    },
+    {
+      icon: 'mdi-trash-can',
+      size: 7,
+      title: 'Trash'
     }
   ];
+
+  selectedCategoryName(selectedItem: string): void {
+    console.log(selectedItem);
+  }
 }
 </script>
 

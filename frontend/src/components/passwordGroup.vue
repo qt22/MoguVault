@@ -6,7 +6,7 @@
         <v-list-item-icon>
           <v-icon v-text="item.icon"></v-icon>
         </v-list-item-icon>
-        <v-list-item-content>
+        <v-list-item-content @click="selectedCategoryName(item.title)">
           <p>{{ item.title }}</p>
           <p>{{ item.size }}</p>
         </v-list-item-content>
@@ -31,7 +31,7 @@ export default class passwordGroup extends Vue {
   selectedCategory?: string = '';
 
   @Emit('selectedcategoryname')
-  selectedCategoryName(selectedItem: string) {
+  selectedCategoryName(selectedItem: string): string {
     return selectedItem;
   }
 }
