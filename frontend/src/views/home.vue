@@ -1,18 +1,15 @@
 <template>
-  <v-main class="login__container">
-    <v-container fluid class="fill-height justify-center ma-0">
-      <v-row justify="start">
-        <v-col cols="3">
-          <passwordGroup
-            categoryHeader="nothing"
-            :categoryItems="mainCategories"
-            @selectedcategoryname="selectedCategoryName"
-          >
-          </passwordGroup
-        ></v-col>
-      </v-row>
-    </v-container>
-  </v-main>
+  <v-container fluid class="pa-0">
+    <v-row no-gutters justify="start">
+      <v-col class="pl-8 pt-4" cols="3">
+        <passwordGroup
+          :categoryItems="mainCategories"
+          @selectedcategoryname="selectedCategoryName"
+        >
+        </passwordGroup
+      ></v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -47,17 +44,4 @@ export default class Home extends Vue {
 }
 </script>
 
-<style lang="scss" scoped>
-.login__container {
-  height: 100%;
-  background: url('/images/nasa-earth.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.login__form-title {
-  @include flex-row-justify-align();
-  @include apply-font(24px, $font-source-sans-pro, normal, bold);
-  margin-bottom: 20px;
-}
-</style>
+<style lang="scss" scoped></style>

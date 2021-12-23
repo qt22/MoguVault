@@ -1,14 +1,20 @@
 <template>
   <v-list>
-    <v-subheader>{{ categoryHeader }}</v-subheader>
+    <v-subheader v-if="categoryHeader">{{ categoryHeader }}</v-subheader>
     <v-list-item-group v-model="selectedCategory" color="primary">
-      <v-list-item v-for="item in categoryItems" :key="item.title">
+      <v-list-item
+        class="d-flex align-center"
+        v-for="item in categoryItems"
+        :key="item.title"
+      >
         <v-list-item-icon>
           <v-icon v-text="item.icon"></v-icon>
         </v-list-item-icon>
         <v-list-item-content @click="selectedCategoryName(item.title)">
-          <p>{{ item.title }}</p>
-          <p>{{ item.size }}</p>
+          <div class="d-flex justify-space-between">
+            <span>{{ item.title }}</span>
+            <span>{{ item.size }}</span>
+          </div>
         </v-list-item-content>
       </v-list-item>
     </v-list-item-group>
@@ -20,7 +26,7 @@ import { Vue, Component, Prop, Emit } from 'vue-property-decorator';
 
 @Component
 export default class passwordGroup extends Vue {
-  @Prop({ required: true }) categoryHeader!: string;
+  @Prop({ default: '' }) categoryHeader!: string;
   @Prop({ required: true }) categoryItems!: {
     icon: string;
     iconColor?: string;
@@ -37,4 +43,8 @@ export default class passwordGroup extends Vue {
 }
 </script>
 
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+.text-desc {
+  // @include apply-font(18px);
+}
+</style>
