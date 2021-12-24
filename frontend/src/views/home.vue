@@ -1,15 +1,14 @@
 <template>
-  <v-main class="login__container">
-    <v-container fluid class="fill-height justify-center ma-0">
-      <v-row justify="start">
-        <v-col cols="3">
+  <v-main>
+    <v-container fluid class="pa-0">
+      <v-row no-gutters justify="start">
+        <v-col class="pl-8 pt-4 sidebar-column" cols="3">
           <passwordGroup
-            categoryHeader="nothing"
             :categoryItems="mainCategories"
             @selectedcategoryname="selectedCategoryName"
           >
-          </passwordGroup
-        ></v-col>
+          </passwordGroup>
+        </v-col>
       </v-row>
     </v-container>
   </v-main>
@@ -18,46 +17,42 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import passwordGroup from '@/components/passwordGroup.vue';
+import { ICategoryGroup } from '@/types/home.type';
 
 @Component({
   components: { passwordGroup }
 })
 export default class Home extends Vue {
-  mainCategories = [
+  mainCategories: ICategoryGroup[] = [
     {
       icon: 'mdi-shield-half-full',
+      iconColor: '#263238',
       size: 42,
       title: 'All passwords'
     },
     {
       icon: 'mdi-star',
+      iconColor: '#FFC107',
       size: 19,
       title: 'Favourites'
     },
     {
       icon: 'mdi-trash-can',
+      iconColor: '#F44336',
       size: 7,
       title: 'Trash'
     }
   ];
 
   selectedCategoryName(selectedItem: string): void {
+    // To Do: load passwords under this category
     console.log(selectedItem);
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.login__container {
-  height: 100%;
-  background: url('/images/nasa-earth.png');
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.login__form-title {
-  @include flex-row-justify-align();
-  @include apply-font(24px, $font-source-sans-pro, normal, bold);
-  margin-bottom: 20px;
+.sidebar-column {
+  background: #f5f5f5;
 }
 </style>
