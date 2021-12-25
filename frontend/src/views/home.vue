@@ -3,6 +3,18 @@
     <v-container fluid class="pa-0">
       <v-row no-gutters justify="start">
         <v-col class="pl-8 pt-4 sidebar-column" cols="3">
+          <div class="d-flex justify-space-between">
+            <v-img
+              src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-vault-economy-kiranshastry-solid-kiranshastry.png"
+              class="mb-4 flex-grow-0"
+              height="64"
+              width="64"
+              contain
+            >
+            </v-img>
+            <v-btn>add password</v-btn>
+          </div>
+
           <passwordGroup
             :categoryItems="mainCategories"
             @selectedcategoryname="selectedCategoryName"
