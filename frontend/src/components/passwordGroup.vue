@@ -1,7 +1,7 @@
 <template>
   <v-list color="#F5F5F5" rounded subheader>
     <v-subheader v-if="categoryHeader">{{ categoryHeader }}</v-subheader>
-    <v-list-item-group v-model="selectedCategory" color="#1976D2" mandatory>
+    <v-list-item-group v-model="selectedCategory" color="#1976D2">
       <v-list-item
         class="d-flex align-center"
         v-for="item in categoryItems"

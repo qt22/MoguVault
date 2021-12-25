@@ -1,29 +1,37 @@
 <template>
-  <v-main>
-    <v-container fluid class="pa-0">
-      <v-row no-gutters justify="start">
-        <v-col class="pl-8 pt-4 sidebar-column" cols="3">
-          <div class="d-flex justify-space-between">
-            <v-img
-              src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-vault-economy-kiranshastry-solid-kiranshastry.png"
-              class="mb-4 flex-grow-0"
-              height="64"
-              width="64"
-              contain
-            >
-            </v-img>
-            <v-btn>add password</v-btn>
-          </div>
+  <v-container fluid class="pa-0 fill-height">
+    <v-row no-gutters class="fill-height" justify="start">
+      <v-col class="pl-8 pt-4 sidebar-column" cols="3">
+        <v-img
+          src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/000000/external-vault-economy-kiranshastry-solid-kiranshastry.png"
+          class="mt-4 mb-8 ml-6 flex-grow-0"
+          height="48"
+          width="48"
+          contain
+        >
+        </v-img>
 
-          <passwordGroup
-            :categoryItems="mainCategories"
-            @selectedcategoryname="selectedCategoryName"
-          >
-          </passwordGroup>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-main>
+        <password-group
+          :categoryItems="mainCategories"
+          @selectedcategoryname="selectedCategoryName"
+        >
+        </password-group>
+
+        <div class="my-4"></div>
+
+        <password-group categoryHeader="Types" :categoryItems="typeCategories">
+        </password-group>
+
+        <div class="my-4"></div>
+
+        <password-group
+          categoryHeader="Folders"
+          :categoryItems="folderCategories"
+        >
+        </password-group>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
 
 <script lang="ts">
@@ -53,6 +61,47 @@ export default class Home extends Vue {
       iconColor: '#F44336',
       size: 7,
       title: 'Trash'
+    }
+  ];
+
+  typeCategories: ICategoryGroup[] = [
+    {
+      icon: 'mdi-login-variant',
+      size: 0,
+      title: 'Login'
+    },
+    {
+      icon: 'mdi-credit-card',
+      size: 0,
+      title: 'Card'
+    },
+    {
+      icon: 'mdi-account-box',
+      size: 0,
+      title: 'Identity'
+    },
+    {
+      icon: 'mdi-note',
+      size: 0,
+      title: 'Secured Note'
+    }
+  ];
+
+  folderCategories: ICategoryGroup[] = [
+    {
+      icon: 'mdi-folder',
+      size: 0,
+      title: 'Work'
+    },
+    {
+      icon: 'mdi-folder',
+      size: 0,
+      title: 'School'
+    },
+    {
+      icon: 'mdi-folder',
+      size: 0,
+      title: 'Personal'
     }
   ];
 
