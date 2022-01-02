@@ -30,6 +30,7 @@
         >
         </password-group>
       </v-col>
+      <v-col cols="4"><search-bar /></v-col>
     </v-row>
   </v-container>
 </template>
@@ -37,10 +38,11 @@
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator';
 import passwordGroup from '@/components/passwordGroup.vue';
+import searchBar from '@/components/searchBar.vue';
 import { ICategoryGroup } from '@/types/home.type';
 
 @Component({
-  components: { passwordGroup }
+  components: { passwordGroup, searchBar }
 })
 export default class Home extends Vue {
   mainCategories: ICategoryGroup[] = [

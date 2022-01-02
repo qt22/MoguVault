@@ -1,0 +1,11 @@
+$border-radius-root: 20px;
+
+$rounded: (
+  0: 0,
+  'sm': $border-radius-root / 2,
+  null: $border-radius-root,
+  'lg': $border-radius-root * 1.5,
+  'xl': $border-radius-root * 4,
+  'pill': 9999px,
+  'circle': 50%
+);
